@@ -30,7 +30,7 @@ namespace CodeChallengeLineIntersection
                     userInput = Console.ReadLine();
                 }
 
-                
+
                 if (lineA is not null && lineB is not null)
                 {
                     if ((Line)lineA == (Line)lineB)
@@ -50,7 +50,7 @@ namespace CodeChallengeLineIntersection
                         {
                             Console.WriteLine("There is no intersection\n");
                         }
-                    } 
+                    }
                 }
             }
         }
@@ -64,8 +64,13 @@ namespace CodeChallengeLineIntersection
                 string[] inputArray = userInput.Split(' ');
                 if (inputArray.Length is 4)
                 {
-                    if (double.TryParse(inputArray[0], out double startX) is false  || double.TryParse(inputArray[1], out double startY) is false  ||
-                        double.TryParse(inputArray[2], out double endX) is false  || double.TryParse(inputArray[3], out double endY) is false)
+                    if (double.TryParse(inputArray[0], out double startX) is false || double.TryParse(inputArray[1], out double startY) is false ||
+                        double.TryParse(inputArray[2], out double endX) is false || double.TryParse(inputArray[3], out double endY) is false)
+                    {
+                        line = null;
+                        return false;
+                    }
+                    else if (startX == endX && startY == endY)
                     {
                         line = null;
                         return false;
@@ -80,12 +85,31 @@ namespace CodeChallengeLineIntersection
         }
 
 
-        static (double, double)? CalculateIntersection (Line lineA, Line lineB)
+        static (double, double)? CalculateIntersection(Line lineA, Line lineB)
         {
             double? x = null;
             double? y = null;
             try
             {
+                //connected by end
+                if (lineA.StartX == lineB.StartX && lineA.StartY == lineB.StartY)
+                {
+
+                    return (lineA.StartX, lineA.StartY);
+                }
+                else if (lineA.StartX == lineB.EndX && lineA.StartY == lineB.EndY)
+                {
+                    return (lineA.StartX, lineA.StartY);
+                }
+                else if (lineA.EndX == lineB.StartX && lineA.EndY == lineB.StartY)
+                {
+                    return (lineA.EndX, lineA.EndY);
+                }
+                else if (lineA.EndX == lineB.EndX && lineA.EndY == lineB.EndY)
+                {
+                    return (lineA.EndX, lineA.EndY);
+                }
+
                 /*Algebra
                  
                 (x - lineA.StartX) / (x - lineA.EndX) = (y - lineA.StartY) / (y - lineA.EndY);
@@ -98,11 +122,12 @@ namespace CodeChallengeLineIntersection
                 ((lineA.StartX - lineA.EndX) / (-lineA.EndY + lineA.StartY) - (lineB.StartX - lineB.EndX) / (-lineB.EndY + lineB.StartY)) * y = (lineB.StartY * lineB.EndX - lineB.EndY * lineB.StartX) / (-lineB.EndY + lineB.StartY) - (lineA.StartY * lineA.EndX - lineA.EndY * lineA.StartX) / (-lineA.EndY + lineA.StartY);
                  */
 
+
                 y = ((lineB.StartY * lineB.EndX - lineB.EndY * lineB.StartX) / (-lineB.EndY + lineB.StartY) - (lineA.StartY * lineA.EndX - lineA.EndY * lineA.StartX) / (-lineA.EndY + lineA.StartY)) / ((lineA.StartX - lineA.EndX) / (-lineA.EndY + lineA.StartY) - (lineB.StartX - lineB.EndX) / (-lineB.EndY + lineB.StartY));
 
                 x = ((lineA.StartX - lineA.EndX) * y + lineA.StartY * lineA.EndX - lineA.EndY * lineA.StartX) / (-lineA.EndY + lineA.StartY);
 
-                if (x is double.PositiveInfinity or double.NegativeInfinity || y is double.PositiveInfinity or double.NegativeInfinity)
+                if (x is double.PositiveInfinity or double.NegativeInfinity or double.NaN|| y is double.PositiveInfinity or double.NegativeInfinity or double.NaN)
                 {
                     // parallel lines
                     return null;
@@ -118,7 +143,15 @@ namespace CodeChallengeLineIntersection
             {
                 return null;
             }
-            
+
+            if (x is double.NegativeZero)
+            {
+                x = 0;
+            }
+            if (y is double.NegativeZero)
+            {
+                y = 0;
+            }
 
             return ((double)x, (double)y);
         }
@@ -136,7 +169,7 @@ namespace CodeChallengeLineIntersection
         {
             StartX = startX;
             StartY = startY;
-            EndX = endX; 
+            EndX = endX;
             EndY = endY;
         }
 
