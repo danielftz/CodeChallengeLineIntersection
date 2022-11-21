@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33103.201
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeChallengeLineIntersection", "CodeChallengeLineIntersection.csproj", "{8ACAE006-F044-428F-9F9D-AFA0203C9209}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8ACAE006-F044-428F-9F9D-AFA0203C9209}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8ACAE006-F044-428F-9F9D-AFA0203C9209}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8ACAE006-F044-428F-9F9D-AFA0203C9209}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8ACAE006-F044-428F-9F9D-AFA0203C9209}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {02DF2E8A-06AA-4AF0-AE01-784ACE076579}
+	EndGlobalSection
+EndGlobal
